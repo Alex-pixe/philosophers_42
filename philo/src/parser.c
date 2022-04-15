@@ -6,13 +6,13 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:57:50 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/13 18:31:17 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/04/15 17:27:48 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	parser(int argc, char **argv, t_args *args)
+int	parser(int argc, char **argv, t_envph *envph)
 {
 	int	i;
 	int	overflow;
@@ -23,16 +23,17 @@ int	parser(int argc, char **argv, t_args *args)
 		return (ft_error(2));
 	if (verify_argv(argc, argv))
 		return (3);
-	args->num_phils = ft_atoi(argv[i++], &overflow);
-	args->time_die = ft_atoi(argv[i++], &overflow);
-	args->time_eat = ft_atoi(argv[i++], &overflow);
-	args->time_sleep = ft_atoi(argv[i++], &overflow);
+	envph->exit = 0;
+	envph->num_phils = ft_atoi(argv[i++], &overflow);
+	envph->time_die = ft_atoi(argv[i++], &overflow);
+	envph->time_eat = ft_atoi(argv[i++], &overflow);
+	envph->time_sleep = ft_atoi(argv[i++], &overflow);
 	if (argc == 6)
-		args->num_time_eat = ft_atoi(argv[i++], &overflow);
+		envph->num_time_eat = ft_atoi(argv[i++], &overflow);
 	else
-		args->num_time_eat = -555;
-	if (!args->num_phils || !args->time_die || !args->time_eat || !args->time_sleep\
-	|| !args->num_time_eat)
+		envph->num_time_eat = -555;
+	if (!envph->num_phils || !envph->time_die || !envph->time_eat || !envph->time_sleep\
+	|| !envph->num_time_eat)
 		return (ft_error(7));
 	if (overflow)
 		return (ft_error(9));
