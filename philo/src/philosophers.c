@@ -95,7 +95,7 @@ void	*th_phil(void *phil)
 
 	tmp_phil = phil;
 	if (tmp_phil->number % 2 && tmp_phil->envph->num_phils < 100)
-		usleep(2000);
+		usleep(1500);
 	else if (tmp_phil->number % 2 && tmp_phil->envph->num_phils >= 100)
 		usleep(20000);
 	while (1)
