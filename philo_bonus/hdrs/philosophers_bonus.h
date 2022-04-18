@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:47:24 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/16 18:18:46 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:54:59 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <semaphore.h>
+# include <signal.h>
 
 typedef unsigned long long big_num;
 
@@ -31,12 +35,15 @@ typedef struct s_envph {
 	big_num	start_t;
 	struct timeval	tv;
 	pthread_t	th_die;
-	pid_t	ph_p;
+	sem_t *forks;
+	sem_t *mess;
+//	pid_t	ph_p;
 } t_envph;
 
 typedef struct s_th_phil {
 	int				number;
 	int				eat_num;
+	pid_t			ph_p;
 	big_num			when_die;
 	t_envph			*envph;
 } t_th_phil;
@@ -49,10 +56,11 @@ int	ft_isdigit(int c);
 int	ft_atoi(const char *str, int *overflow);
 int	skipp(const char *str, int *sign, int *overflow);
 
-void	*th_phil(void *phil);
-void	sleeping_phil(t_th_phil	*phil);
-void	try_take_fork(pthread_mutex_t *mut_frk, int num, t_envph *envph);
+void	ph_proc(t_th_phil	*phils);
 big_num	get_time(t_envph *envph);
-void	*when_die(void *phils);
+//void	*when_die(void *phils);
+void	ft_exit(t_th_phil *phils, int err);
+int	ph_dead(t_th_phil *phils);
+void	print_m(t_th_phil *phils, char *str);
 
 # endif
