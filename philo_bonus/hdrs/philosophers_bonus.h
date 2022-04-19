@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:47:24 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/18 18:54:59 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:38:51 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ typedef struct s_envph {
 	int	exit;
 	big_num	start_t;
 	struct timeval	tv;
-	pthread_t	th_die;
+//	pthread_t	th_die;
+//	pid_t	tmp_proc;
 	sem_t *forks;
 	sem_t *mess;
+	sem_t *all_eat;
 //	pid_t	ph_p;
 } t_envph;
 
@@ -45,6 +47,7 @@ typedef struct s_th_phil {
 	int				eat_num;
 	pid_t			ph_p;
 	big_num			when_die;
+	pthread_t		th_die;
 	t_envph			*envph;
 } t_th_phil;
 
@@ -56,11 +59,12 @@ int	ft_isdigit(int c);
 int	ft_atoi(const char *str, int *overflow);
 int	skipp(const char *str, int *sign, int *overflow);
 
-void	ph_proc(t_th_phil	*phils);
+void	ph_proc(t_th_phil *phils);
 big_num	get_time(t_envph *envph);
-//void	*when_die(void *phils);
+void	*when_die(void *tmp_phil);
 void	ft_exit(t_th_phil *phils, int err);
 int	ph_dead(t_th_phil *phils);
-void	print_m(t_th_phil *phils, char *str);
+void	print_m(t_th_phil *phils, char *str, int flag);
+void	ft_usleep(big_num ms, t_th_phil *phils);
 
 # endif
