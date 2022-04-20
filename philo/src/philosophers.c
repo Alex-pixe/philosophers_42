@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:56:07 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/15 15:23:27by cbridget         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:26:21 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ int	main(int argc, char **argv)
 	gettimeofday(&envph.tv, NULL);
 	envph.start_t = (envph.tv.tv_sec * 1000) + (envph.tv.tv_usec / 1000);
 	while (++i < envph.num_phils)
-		pthread_mutex_init(&phils[i].mut_frk, NULL);
+	{
+		if (pthread_mutex_init(&phils[i].mut_frk, NULL))
+			return (ft_close());
+	}
+	if (pthread_mutex_init(&envph.mt_mess, NULL))
+		return (ft_close());
 	i = 0;
 	while (i < envph.num_phils)
 	{
@@ -57,7 +62,7 @@ int	main(int argc, char **argv)
 void	*when_die(void *phils)
 {
 	t_th_phil	*tmp_phils;
-	big_num		ntime;
+	t_big_num		ntime;
 	int i;
 	int	neat;
 
@@ -84,6 +89,7 @@ void	*when_die(void *phils)
 			tmp_phils->envph->exit = 1;
 			return (NULL);
 		}
+		usleep(10);
 		i = 0;
 		neat = 0;
 	}
@@ -94,10 +100,11 @@ void	*th_phil(void *phil)
 	t_th_phil	*tmp_phil;
 
 	tmp_phil = phil;
-	if (tmp_phil->number % 2 && tmp_phil->envph->num_phils < 100)
-		usleep(1500);
-	else if (tmp_phil->number % 2 && tmp_phil->envph->num_phils >= 100)
-		usleep(20000);
+	if (tmp_phil->number % 2)
+//		usleep(1500);
+		ft_usleep(tmp_phil->envph->time_eat, tmp_phil);
+//	else if (tmp_phil->number % 2)
+//		ft_usleep(17000, tmp_phil);
 	while (1)
 	{
 		if (tmp_phil->number == 1)
@@ -124,7 +131,7 @@ void	*th_phil(void *phil)
 			tmp_phil->eat_num++;
 		tmp_phil->when_die += tmp_phil->envph->time_die;
 		printf("%llu %d is eating\n", get_time(tmp_phil->envph), tmp_phil->number);
-		usleep(tmp_phil->envph->time_eat * 1000);
+		ft_usleep(tmp_phil->envph->time_eat, tmp_phil);
 		sleeping_phil(tmp_phil);
 		if (tmp_phil->envph->exit)
 			return (NULL);
@@ -147,7 +154,7 @@ void	sleeping_phil(t_th_phil	*phil)
 	if (phil->envph->exit)
 			return ;
 	printf("%llu %d is sleeping\n", get_time(phil->envph), phil->number);
-	usleep(phil->envph->time_sleep * 1000);
+	ft_usleep(phil->envph->time_sleep, phil);
 }
 
 void	try_take_fork(pthread_mutex_t *mut_frk, int num, t_envph *envph)
@@ -158,8 +165,32 @@ void	try_take_fork(pthread_mutex_t *mut_frk, int num, t_envph *envph)
 	printf("%llu %d has taken a fork\n", get_time(envph), num);
 }
 
-big_num	get_time(t_envph *envph)
+t_big_num	get_time(t_envph *envph)
 {
 	gettimeofday(&envph->tv, NULL);
 	return ((envph->tv.tv_sec * 1000) + (envph->tv.tv_usec / 1000) - envph->start_t);
+}
+
+void	ft_usleep(t_big_num ms, t_th_phil *phils)
+{
+	t_big_num	ms_end;
+	t_big_num	ms_now;
+
+	gettimeofday(&phils->envph->tv, NULL);
+	ms_end = (phils->envph->tv.tv_sec * 1000) + \
+	(phils->envph->tv.tv_usec / 1000) + ms;
+	ms_now = (phils->envph->tv.tv_sec * 1000) + \
+	(phils->envph->tv.tv_usec / 1000);
+	while (ms_now < ms_end)
+	{
+		gettimeofday(&phils->envph->tv, NULL);
+		ms_now = (phils->envph->tv.tv_sec * 1000) + \
+		(phils->envph->tv.tv_usec / 1000);
+		usleep(10);
+	}
+}
+
+void	print_m(t_th_phil *phils, char *str, int flag)
+{
+	
 }

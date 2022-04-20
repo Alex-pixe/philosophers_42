@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/05 19:40:05 by cbridget          #+#    #+#              #
-#    Updated: 2022/04/18 16:02:35 by cbridget         ###   ########.fr        #
+#    Updated: 2022/04/20 18:29:06 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,14 @@ NAME = philo_bonus
 
 HEAD = hdrs/philosophers_bonus.h
 
-SRC = philosophers_bonus.c parser_bonus.c parser2_bonus.c
+SRC = philosophers_bonus.c parser_bonus.c parser2_bonus.c \
+ph_process_bonus.c
 
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 
 BUILD_FOLDER := $(shell mkdir -p obj)
 
-FLAGS = -Wall -Werror -Wextra -g3
+FLAGS = -Wall -Werror -Wextra
 
 CC = cc
 
@@ -40,4 +41,6 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 
-re : fclean all
+re : fclean
+	@mkdir -p obj
+	$(MAKE)

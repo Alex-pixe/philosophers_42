@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:57:50 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/19 19:40:58 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:57:55 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	parser(int argc, char **argv, t_envph *envph)
 		return (ft_error(2));
 	if (verify_argv(argc, argv))
 		return (3);
-	envph->exit = 0;
 	envph->num_phils = ft_atoi(argv[i++], &overflow);
 	envph->time_die = ft_atoi(argv[i++], &overflow);
 	envph->time_eat = ft_atoi(argv[i++], &overflow);
@@ -32,8 +31,8 @@ int	parser(int argc, char **argv, t_envph *envph)
 		envph->num_time_eat = ft_atoi(argv[i++], &overflow);
 	else
 		envph->num_time_eat = -555;
-	if (!envph->num_phils || !envph->time_die || !envph->time_eat || !envph->time_sleep\
-	|| !envph->num_time_eat)
+	if (!envph->num_phils || !envph->time_die || !envph->time_eat \
+	|| !envph->time_sleep || !envph->num_time_eat)
 		return (ft_error(7));
 	if (overflow)
 		return (ft_error(9));
