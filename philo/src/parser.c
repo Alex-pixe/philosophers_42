@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:57:50 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/15 17:27:48 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:29:38 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	parser(int argc, char **argv, t_envph *envph)
 		envph->num_time_eat = ft_atoi(argv[i++], &overflow);
 	else
 		envph->num_time_eat = -555;
-	if (!envph->num_phils || !envph->time_die || !envph->time_eat || !envph->time_sleep\
-	|| !envph->num_time_eat)
+	if (!envph->num_phils || !envph->time_die || \
+		!envph->time_eat || !envph->time_sleep || !envph->num_time_eat)
 		return (ft_error(7));
 	if (overflow)
 		return (ft_error(9));

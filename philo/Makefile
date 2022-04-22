@@ -6,7 +6,7 @@
 #    By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/05 19:40:05 by cbridget          #+#    #+#              #
-#    Updated: 2022/04/20 17:29:53 by cbridget         ###   ########.fr        #
+#    Updated: 2022/04/22 16:02:51 by cbridget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ = $(addprefix obj/,$(SRC:.c=.o))
 
 BUILD_FOLDER := $(shell mkdir -p obj)
 
-FLAGS = -Wall -Werror -Wextra #-fsanitize=thread
+FLAGS = -Wall -Werror -Wextra# -fsanitize=thread
 
 CC = cc
 
@@ -40,4 +40,6 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 
-re : fclean all
+re : fclean
+	@mkdir -p obj
+	$(MAKE)
