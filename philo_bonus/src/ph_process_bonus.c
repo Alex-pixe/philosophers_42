@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 15:11:31 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/20 17:17:49 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:03:37 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,15 @@ void	ft_usleep(t_big_num ms, t_th_phil *phils)
 	t_big_num	ms_now;
 
 	gettimeofday(&phils->envph->tv, NULL);
-	ms_end = (phils->envph->tv.tv_sec * 1000) + \
-	(phils->envph->tv.tv_usec / 1000) + ms;
 	ms_now = (phils->envph->tv.tv_sec * 1000) + \
 	(phils->envph->tv.tv_usec / 1000);
+	ms_end = ms_now + ms;
 	while (ms_now < ms_end)
 	{
 		gettimeofday(&phils->envph->tv, NULL);
 		ms_now = (phils->envph->tv.tv_sec * 1000) + \
 		(phils->envph->tv.tv_usec / 1000);
-		usleep(10);
+		usleep(100);
 	}
 }
 
@@ -91,12 +90,12 @@ void	*when_die(void *tmp_phil)
 		pthread_mutex_lock(&phil->mt_die);
 		if (phil->when_die <= get_time(phil->envph))
 		{
-			print_m(phil, "dead", 0);
+			print_m(phil, "died", 0);
 			exit(0);
 			break ;
 		}
 		pthread_mutex_unlock(&phil->mt_die);
-		usleep(10);
+		usleep(100);
 	}
 	return (NULL);
 }
