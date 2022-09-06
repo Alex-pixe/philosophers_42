@@ -24,5 +24,11 @@ Once awake, they start thinking again. The simulation stops when a philosopher d
 
 • No need to say that philosophers should avoid dying!
 
-arguments: number_of_philosophers, time_to_die, time_to_eat, time_to_sleep,
-[number_of_times_each_philosopher_must_eat].
+In the mandatory part, each philosopher must be a thread, but in the bonus part  
+every philosopher must be a process!  
+  
+Arguments: number_of_philosophers, time_to_die, time_to_eat, time_to_sleep,  
+[number_of_times_each_philosopher_must_eat].  
+  
+Usage example:  
+    ./philo 5 800 200 200 7 

@@ -6,7 +6,7 @@
 /*   By: cbridget <cbridget@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:47:24 by cbridget          #+#    #+#             */
-/*   Updated: 2022/04/20 16:22:36 by cbridget         ###   ########.fr       */
+/*   Updated: 2022/09/06 22:22:18 by cbridget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 # include <semaphore.h>
 # include <signal.h>
