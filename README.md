@@ -3,6 +3,7 @@ project for ecole 42
 
 Dining philosophers problem is a problem created by Edsger Wybe Dijkstra in 1965 to explain the deadlock state  
 of an operating system, which is traditionally commonly introduced in lectures on operating systems.  
+You can read about it [here](https://en.wikipedia.org/wiki/Dining_philosophers_problem).
   
 ### Rules for philosophers:  
 * One or more philosophers sit at a round table.
@@ -20,18 +21,18 @@ of an operating system, which is traditionally commonly introduced in lectures o
 * Philosophers don’t know if another philosopher is about to die.
 * No need to say that philosophers should avoid dying!
   
-In the mandatory part, each philosopher must be a thread, but in the bonus part  
-every philosopher must be a process!  
+In the mandatory part, each philosopher must be a thread,  
+but in the bonus part every philosopher must be a process!  
   
 ### Arguments:
-* number_of_philosophers
-* time_to_die
-* time_to_eat
-* time_to_sleep
-* [number_of_times_each_philosopher_must_eat]
+• number_of_philosophers
+• time_to_die
+• time_to_eat
+• time_to_sleep
+• [number_of_times_each_philosopher_must_eat]
   
-* You can see the full assignment here [subject](?)
-* Coding style: [norminette](?)
+You can see the full assignment here [subject](https://github.com/cbridget42/philosophers_42/blob/main/subject/en.subject.pdf)  
+Coding style: [norminette](https://github.com/cbridget42/philosophers_42/blob/main/subject/en.norm.pdf)  
   
 ### Usage:
 * first you need to download the repository and compile the code! To do this, run:
@@ -54,4 +55,13 @@ every philosopher must be a process!
 	make clean //remove objects files
 	make fclean //remove objects files and executable
 	```
+  
+#### Usage example:
+![image](https://github.com/cbridget42/philosophers_42/blob/main/images/phylo.svg)
+  
+#### Tests:
+![image](https://github.com/cbridget42/philosophers_42/blob/main/images/Screenshot%20from%202022-11-16%2018-34-56.png)
+  
+#### final score:
+![image](https://github.com/cbridget42/philosophers_42/blob/main/images/Screenshot%20from%202022-11-16%2018-47-26.png)
   
