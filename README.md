@@ -25,11 +25,11 @@ In the mandatory part, each philosopher must be a thread,
 but in the bonus part every philosopher must be a process!  
   
 ### Arguments:
-• number_of_philosophers
-• time_to_die
-• time_to_eat
-• time_to_sleep
-• [number_of_times_each_philosopher_must_eat]
+• number_of_philosophers  
+• time_to_die  
+• time_to_eat  
+• time_to_sleep  
+• [number_of_times_each_philosopher_must_eat]  
   
 You can see the full assignment here [subject](https://github.com/cbridget42/philosophers_42/blob/main/subject/en.subject.pdf)  
 Coding style: [norminette](https://github.com/cbridget42/philosophers_42/blob/main/subject/en.norm.pdf)  
